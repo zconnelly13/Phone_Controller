@@ -14,4 +14,6 @@ var server = http.createServer(function (request, response) {
     response.end("Primus!?!?!?");
 }), primus = new Primus(server,{});
 
+primus.save(__dirname + '/public_files/js/primus.js');
+
 server.listen(1310);
