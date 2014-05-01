@@ -16,4 +16,12 @@ var server = http.createServer(function (request, response) {
 
 primus.save(__dirname + '/public_files/js/primus.js');
 
+primus.on('connection', function (spark) {
+    console.log(spark.address);
+});
+
+primus.on('disconnection', function(spark) {
+    console.log("Disconnect: " + spark.address);
+});
+
 server.listen(1310);
