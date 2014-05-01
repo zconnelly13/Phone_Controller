@@ -18,7 +18,7 @@ primus.save(__dirname + '/public_files/js/primus.js');
 
 primus.on('connection', function (spark) {
     spark.on('data', function message(data) {
-        console.log(data);
+        primus.write(data);
     });
     console.log(spark.address);
 });
