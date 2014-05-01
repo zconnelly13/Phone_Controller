@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "3.x",
-    "primus": "^2.2.1"
+    "primus": "^2.2.1",
+    "ws": "^0.4.31"
   }
 }
