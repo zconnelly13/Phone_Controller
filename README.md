@@ -44,3 +44,17 @@ event.rotationRate.gamma // Left/Right
 ```
 
 After this we have set up a browser-side "client" that simply reads the data. And this is our proof of concept.
+
+####Minimum Viable Product
+
+Now that we have shown that this is feasable, the next step is to apply this to a game. The game of choice will be "Choose Wisely" because it has simple controls and will require a small amount of modification to work with the phone as the controller.
+
+The first thing that needs to be done is Choose Wisely needs to be imported into the static folder of this project.
+
+Then controls need to be implemented on the phone (this is not communication via Primus but simply the controls). Holding down the right side of the screen will act as the right key down, the left side of the screen will be moving left, and for simplicity both down will be jumping.
+
+Next the Choose Wisely game needs to connect to the Primus server, thus providing it's IP. The Primus server should store a mapping of the browser's IP to the spark. Choose wisely should then display a QR code with a link that goes to the Primus server with a get request that is the ip address of the browser (this can be hashed later).
+
+Now the phone will go to a url that looks like "/phone.html?ip=76.128.91.10". The phone will then connect to the Primus server and send along the ip. Primus can now have an "on('data')" function that looks up the spark associated with that IP address and spark.write's the data to the browser.
+
+Finally the browser needs to appropriately handle the commands it receives.
