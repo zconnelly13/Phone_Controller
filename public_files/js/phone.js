@@ -13,7 +13,17 @@ function deviceOrientationHandler(event) {
     var gamma = Math.round(event.gamma*10);
     var data = 'Alpha: ' + alpha + '<br />Beta: ' + beta + '<br />Gamma: ' + gamma;
     document.getElementById('currentOrientation').innerHTML = data
+    primus.write(data);
 }
+
+var primus =  Primus.connect('http://www.jazzberrygames.com:1310/', {
+        reconnect: {
+            maxDelay: 150000,
+            minDelay: 500,
+            retries: 10
+        }
+    }
+);
 
 window.addEventListener('devicemotion',deviceMotionHandler,false);
 window.addEventListener('deviceorientation',deviceOrientationHandler,false);

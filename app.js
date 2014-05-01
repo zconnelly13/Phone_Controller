@@ -17,6 +17,9 @@ var server = http.createServer(function (request, response) {
 primus.save(__dirname + '/public_files/js/primus.js');
 
 primus.on('connection', function (spark) {
+    spark.on('data', function message(data) {
+        console.log(data);
+    });
     console.log(spark.address);
 });
 
