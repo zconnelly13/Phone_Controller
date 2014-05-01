@@ -1,4 +1,4 @@
 Phone_Controller
 ================
 
-Use your phone to control games on your computer!
+Use your phone to control browser-based html5 games!
