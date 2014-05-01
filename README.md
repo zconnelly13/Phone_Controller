@@ -42,3 +42,5 @@ event.rotationRate.alpha // Direction
 event.rotationRate.beta // Front/Back
 event.rotationRate.gamma // Left/Right
 ```
+
+After this we have set up a browser-side "client" that simply reads the data. And this is our proof of concept.
