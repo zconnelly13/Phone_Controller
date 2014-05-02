@@ -44,3 +44,29 @@ event.rotationRate.gamma // Left/Right
 ```
 
 After this we have set up a browser-side "client" that simply reads the data. And this is our proof of concept.
+
+####Minimum Viable Product
+
+Now that we have shown that this is feasable, the next step is to apply this to a game. The game of choice will be "Choose Wisely" because it has simple controls and will require a small amount of modification to work with the phone as the controller.
+
+The first thing that needs to be done is Choose Wisely needs to be imported into the static folder of this project.
+
+Then controls need to be implemented on the phone (this is not communication via Primus but simply the controls). The right thumb should be used for movement and the left for jumping. The screen is divided vertically into four quarters. If there is a touch in the first two quarters (the left half of the screen) this is jumping. If there is a touch in the 3rd quarter the character should move left and the 4th quarter the character should move right.
+
+Next the Choose Wisely game needs to connect to the Primus server, thus providing it's IP. The Primus server should store a mapping of the browser's IP to the spark. Choose wisely should then display a link (this will eventually be a QR code cuz we fancy) that goes to the node server with a get request that is the ip address of the browser (this can be hashed later).
+
+Now the phone will go to a url that looks like "/phone.html?ip=76.128.91.10". The phone will then connect to the Primus server and send along the ip. Primus can now have an "on('data')" function that looks up the spark associated with that IP address and spark.write's the data to the browser.
+
+Finally the browser needs to appropriately handle the commands it receives.
+
+###Applying This to a Single Player Game
+
+Now that we've prooved it's feasable, we need to explore wether or not it's enjoyable to play on the phone. We're going to take a classic game (like tetris or pong or something) and see if it's fun to play with the phone connected to the computer. 
+
+There were also some weird problems with the ip address being similar, but we're not going to worry about that right now.
+
+We need to be able to send a text to the phone or scan a QR code to access the game. We'll also need a controller layout for the phone.
+
+For texting it seems we can use [Twilio](https://www.twilio.com/user/account/developer-tools/api-explorer/message-create) at least for now, as they are integrated nicely with Node.js. [Tropo](https://www.tropo.com/pricing/) and [Zeep](http://www.zeepmobile.com/) would also be worth a look.
+
+For the QR code [this stack overflow question](http://stackoverflow.com/questions/4542632/qr-code-generation-library-in-javascript) contains a rudimentary library (but that's all we really need). [But this looks much better](http://davidshimjs.github.io/qrcodejs/).
