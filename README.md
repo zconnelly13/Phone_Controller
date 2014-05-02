@@ -58,3 +58,15 @@ Next the Choose Wisely game needs to connect to the Primus server, thus providin
 Now the phone will go to a url that looks like "/phone.html?ip=76.128.91.10". The phone will then connect to the Primus server and send along the ip. Primus can now have an "on('data')" function that looks up the spark associated with that IP address and spark.write's the data to the browser.
 
 Finally the browser needs to appropriately handle the commands it receives.
+
+###Applying This to a Single Player Game
+
+Now that we've prooved it's feasable, we need to explore wether or not it's enjoyable to play on the phone. We're going to take a classic game (like tetris or pong or something) and see if it's fun to play with the phone connected to the computer. 
+
+There were also some weird problems with the ip address being similar, but we're not going to worry about that right now.
+
+We need to be able to send a text to the phone or scan a QR code to access the game. We'll also need a controller layout for the phone.
+
+For texting it seems we can use [Twilio](https://www.twilio.com/user/account/developer-tools/api-explorer/message-create) at least for now, as they are integrated nicely with Node.js. [Tropo](https://www.tropo.com/pricing/) and [Zeep](http://www.zeepmobile.com/) would also be worth a look.
+
+For the QR code [this stack overflow question](http://stackoverflow.com/questions/4542632/qr-code-generation-library-in-javascript) contains a rudimentary library (but that's all we really need). [But this looks much better](http://davidshimjs.github.io/qrcodejs/).
