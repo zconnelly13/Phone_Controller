@@ -4,6 +4,7 @@ var state = {
 };
 
 function sendState(x, width) {
+    primus.write(state);
     document.getElementById('output').innerHTML = JSON.stringify(state) + x + ',' + width;
 }
 
@@ -62,7 +63,27 @@ window.addEventListener('touchstart',touchStartHandler,false);
 window.addEventListener('touchmove',touchStartHandler,false);
 window.addEventListener('touchend',touchEndHandler,false);
 
-/*
+var queryString = function () {
+  var query_string = {};
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+        // If first entry with this name
+    if (typeof query_string[pair[0]] === "undefined") {
+      query_string[pair[0]] = pair[1];
+        // If second entry with this name
+    } else if (typeof query_string[pair[0]] === "string") {
+      var arr = [ query_string[pair[0]], pair[1] ];
+      query_string[pair[0]] = arr;
+        // If third or later entry with this name
+    } else {
+      query_string[pair[0]].push(pair[1]);
+    }
+  } 
+    return query_string;
+} ();
+
 var primus =  Primus.connect('http://www.jazzberrygames.com:1310/', {
         reconnect: {
             maxDelay: 150000,
@@ -71,5 +92,6 @@ var primus =  Primus.connect('http://www.jazzberrygames.com:1310/', {
         }
     }
 );
-*/
-//window.addEventListener('deviceorientation',deviceOrientationHandler,false);
+
+var data = {'ip':queryString.ip};
+primus.write(data);

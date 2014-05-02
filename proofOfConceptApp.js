@@ -16,29 +16,15 @@ var server = http.createServer(function (request, response) {
 
 primus.save(__dirname + '/public_files/js/primus.js');
 
-var ipToSparks = {};
-
 primus.on('connection', function (spark) {
-    var ip = spark.address.ip + "";
-    ipToSparks[ip] = spark;
-    spark.write({'ip':ip});
-    spark.on('data',function message(data) {
-        if (data.ip) {
-            spark.browserSpark = ipToSparks[data.ip + ""]; 
-            console.log("Paired: " + spark.address.ip + " to " + data.ip);
-        } else {
-            if (spark.browserSpark) {
-                spark.browserSpark.write(data);
-            } else {
-                console.log("no browser spark?");
-            }
-        }
+    spark.on('data', function message(data) {
+        primus.write(data);
     });
-    console.log("Connect: " + spark.address.ip);
+    console.log(spark.address);
 });
 
 primus.on('disconnection', function(spark) {
-    console.log("Disconnect: " + spark.address.ip);
+    console.log("Disconnect: " + spark.address);
 });
 
 server.listen(1310);

@@ -142,14 +142,14 @@ ig.module(
                 this.wallJumpingRight= false;
                 this.wallJump = false;
             }
-            if (ig.input.state('left')) {
+            if (ig.input.state('left') || ig.game.phoneController.direction == "left") {
                 this.setMoveLeft();
-            } else if (ig.input.state('right')) {
+            } else if (ig.input.state('right') || ig.game.phoneController.direction == "right") {
                 this.setMoveRight();
             } else if (!ig.ua.mobile) {
                 this.setStop();
             }
-            if (ig.input.pressed('up')) {
+            if (ig.input.pressed('up') || ig.game.phoneController.jump) {
                 this.jump();
             }
             this.spaceSkill();

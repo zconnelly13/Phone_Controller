@@ -69,6 +69,26 @@ MyGame = ig.Game.extend({
     choices: {},
 
 	init: function() {
+
+        // phone controller
+        ig.game.phoneController = {};
+        var primus = Primus.connect('http://www.jazzberrygames.com:1310/', {
+            reconnect: {
+                maxDelay: 150000,
+                minDelay: 500,
+                retries: 10
+            }
+        });
+
+        primus.on('data',function message(data) {
+            if (data.ip) {
+                alert("http://www.jazzberrygames.com:1313/choose_wisely/phone_controller/phone.html?ip=" + data.ip);
+            } else {
+                ig.game.phoneController = data;
+                console.log(ig.game.phoneController);
+            }
+        });
+
         // qwerty
         ig.input.bind(ig.KEY.A,  'left');
         ig.input.bind(ig.KEY.D,'right');

@@ -1,20 +1,23 @@
-function deviceMotionHandler(event) {
-    var rotation = event.rotationRate;
-    var alpha = Math.round(rotation.alpha*10);
-    var beta  = Math.round(rotation.beta*10);
-    var gamma = Math.round(rotation.gamma*10);
-    var data = 'Alpha: ' + alpha + '<br />Beta: ' + beta + '<br />Gamma: ' + gamma;
-    document.getElementById('output').innerHTML = data
-}
-
-function deviceOrientationHandler(event) {
-    var alpha = Math.round(event.alpha*10);
-    var beta  = Math.round(event.beta*10);
-    var gamma = Math.round(event.gamma*10);
-    var data = 'Alpha: ' + alpha + '<br />Beta: ' + beta + '<br />Gamma: ' + gamma;
-    document.getElementById('currentOrientation').innerHTML = data
-    primus.write(data);
-}
+var queryString = function () {
+  var query_string = {};
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+        // If first entry with this name
+    if (typeof query_string[pair[0]] === "undefined") {
+      query_string[pair[0]] = pair[1];
+        // If second entry with this name
+    } else if (typeof query_string[pair[0]] === "string") {
+      var arr = [ query_string[pair[0]], pair[1] ];
+      query_string[pair[0]] = arr;
+        // If third or later entry with this name
+    } else {
+      query_string[pair[0]].push(pair[1]);
+    }
+  } 
+    return query_string;
+} ();
 
 var primus =  Primus.connect('http://www.jazzberrygames.com:1310/', {
         reconnect: {
@@ -24,6 +27,11 @@ var primus =  Primus.connect('http://www.jazzberrygames.com:1310/', {
         }
     }
 );
+
+alert(queryString.ip);
+
+var data = {'ip':queryString.ip};
+primus.write(data);
 
 window.addEventListener('devicemotion',deviceMotionHandler,false);
 window.addEventListener('deviceorientation',deviceOrientationHandler,false);
