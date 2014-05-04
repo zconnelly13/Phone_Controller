@@ -52,6 +52,7 @@ Now that we have shown that this is feasable, the next step is to apply this to 
 The first thing that needs to be done is Choose Wisely needs to be imported into the static folder of this project.
 
 Then controls need to be implemented on the phone (this is not communication via Primus but simply the controls). The right thumb should be used for movement and the left for jumping. The screen is divided vertically into four quarters. If there is a touch in the first two quarters (the left half of the screen) this is jumping. If there is a touch in the 3rd quarter the character should move left and the 4th quarter the character should move right.
+![Phone Controls](http://i.imgur.com/sqfir2Q.png)
 
 Next the Choose Wisely game needs to connect to the Primus server, thus providing it's IP. The Primus server should store a mapping of the browser's IP to the spark. Choose wisely should then display a link (this will eventually be a QR code cuz we fancy) that goes to the node server with a get request that is the ip address of the browser (this can be hashed later).
 
