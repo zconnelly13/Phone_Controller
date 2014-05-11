@@ -13,16 +13,18 @@
 </head>
 
 <body>
-<div id="qrcode"></div>
+    <div id="qrcode"></div>
     <script type="text/javascript">
     new QRCode(document.getElementById("qrcode"), "http://www.github.com/zconnelly13");
     </script>
     <br \>
-    <h1>
-        Or enter your phone number
-    </h1>
-    <input type='text' size='30px' id='phoneNumber'></input>
-    <input id='sendmeatext' type='button' value='Send me a text'></input>
+    <div id="phoneNumber">
+        <h1>
+            Or enter your phone number
+        </h1>
+        <input type='text' size='30px' id='phoneNumber'></input>
+        <input id='sendmeatext' type='button' value='Send me a text'></input>
+    </div>
 </body>
 
 </html>

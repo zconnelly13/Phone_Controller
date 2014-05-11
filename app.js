@@ -19,7 +19,7 @@ primus.save(__dirname + '/public_files/js/primus.js');
 var ipToSparks = {};
 
 primus.on('connection', function (spark) {
-    var ip = spark.address.ip + "";
+    var ip = spark.address.ip + "" + new Date().getTime();
     ipToSparks[ip] = spark;
     spark.write({'ip':ip});
     spark.on('data',function message(data) {
