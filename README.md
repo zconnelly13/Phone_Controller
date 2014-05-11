@@ -5,9 +5,7 @@ Use your phone to control browser-based html5 games!
 
 ###Pong Demo
 To play a 2-player pong demo go to [http://www.jazzberrygames.com:2313/pong/index.html](http://www.jazzberrygames.com:2313/pong/index.html)
-
 Use your favorite QR Code scanner to connect player 1 and player 2 and have at it.
-
 Your phone's device orientation controls the paddle :)
 
 This could use quite a bit of polish but it's an interesting proof of concept.
